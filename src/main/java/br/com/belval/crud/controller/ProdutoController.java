@@ -69,4 +69,16 @@ public class ProdutoController {
 		model.addAttribute("produto", p);
 		return "novo-produto";
 	}
+	
+	@GetMapping("/produto/{id}/delete")
+	public String delete (@PathVariable("id") int id) {
+		Produto p = repository.findById(id);
+		if (p == null) {
+			return "produto-nao-encontrado";
+		}
+		repository.delete(p);
+		return "redirect:/produto/list";
+
+  }
 }
+
